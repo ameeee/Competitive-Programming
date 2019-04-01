@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+
+public class Main {
+	static int a[][];
+	static boolean b[][];
+	static int M;
+	static int C;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scan=new Scanner(System.in);
+		int t=scan.nextInt();
+		a=new int[21][21];
+		b=new boolean[21][21];
+		for (int i = 0; i < t ; i++) {
+			 M=scan.nextInt();
+			 C=scan.nextInt();
+			
+			for (int j = 0; j < C ; j++) {
+				int k=scan.nextInt();
+				a[j][0]=k;
+				for (int z = 1; z <= k  ; z++) {
+					a[j][z]=scan.nextInt();
+				}
+			}
+			int x=cur(0,M);
+			if(x==-1)
+				System.out.println("no solution");
+			else System.out.println(x);
+		}
+		
+	}
+	public static int cur(int index1,int left){
+		if(left<0){
+			return -1;
+		}
+		if(index1==C){
+			return M-left;
+		}
+		int max=Integer.MIN_VALUE;
+		for (int i = 1; i <= a[index1][0]; i++) {
+			max=Math.max(max, cur(index1+1,left-a[index1][i])); 
+		
+		}
+		return max;
+	}
+
+}
